@@ -1,0 +1,29 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid rgb(188, 186, 186);
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.form input{
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid rgb(211, 158, 51);
+}
+
+.btn-form{
+    border: none;
+    padding: 7px 15px;
+    background-color: rgb(211, 158, 51);
+    border-radius: 5px;
+}
+
+.btn-form:hover{
+    cursor: pointer;
+    background-color: rgb(238, 180, 65);
+    box-shadow: 0 0 5px rgb(211, 158, 51);
+    transition: .3s linear all;
+}

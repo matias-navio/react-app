@@ -1,0 +1,42 @@
+.table-products{
+    border-collapse: collapse;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table-products thead tr th{
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.table-products tbody tr td{
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.btn-table{
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.rojo{
+    border: 1px solid red;
+}
+
+.azul{
+    border: 1px solid blue;
+}
+
+.rojo:hover{
+    background-color: red;
+    cursor: pointer;
+    transition: .2s linear all;
+}
+
+.azul:hover{
+    background-color: blue;
+    cursor: pointer;
+    transition: .2s linear all;
+}
