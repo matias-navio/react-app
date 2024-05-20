@@ -1,4 +1,5 @@
 import { ProductDetail } from "./ProductDetail"
+import { PropTypes } from "prop-types"
 
 // de esta manera pasamos los props que veinen del padre, un arreglo de productos
 export const ProductTable = ({products = []}) => {
@@ -19,4 +20,9 @@ export const ProductTable = ({products = []}) => {
             </tbody>
         </table>
     )
+}
+
+// validación de props
+ProductTable.propTypes = {
+    products: PropTypes.array.isRequired
 }

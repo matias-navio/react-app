@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { listProduct } from "../services/productService";
 import { ProductTable } from "./ProductTable";
+import { PropTypes } from "prop-types"
 
 
 
 // esto es un componente de React, usamos una función flecha 
-export const ProductApp = () => {
+export const ProductApp = ({title = ''}) => {
 
     const[products, setProducts] = useState([]);
 
@@ -24,7 +25,12 @@ export const ProductApp = () => {
         <>
             {/* esto forma parte de los props que se le pasan al hijo */}
             {/* en este caso al hijo ProductTable */}
+            <h1>{ title }</h1>
             <ProductTable products={products}/>
         </>
     )
+}
+
+ProductApp.propsTypes = {
+    title: PropTypes.string.isRequired
 }
