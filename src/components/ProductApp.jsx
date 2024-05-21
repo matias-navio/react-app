@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listProduct } from "../services/productService";
+import { create, findAll, remove, update } from "../services/productService";
 import { ProductTable } from "./ProductTable";
 import { PropTypes } from "prop-types"
 import { ProductForm } from "./ProductForm";
@@ -19,35 +19,44 @@ export const ProductApp = ({title = ''}) => {
         price: ''
     })
 
+    // funcion para devolver los productos de forma sincronica desde el backend, que se devuelve en el useEffect
+    const getProduct = async () => {
+        const result = await findAll(); 
+        setProducts(result.data._embedded.products);
+    }
+
     /*
         Este hook de react se usa para inicializar 
         products con initProduct cuando el componente
         se renderiza por primera vez
     */
     useEffect(() => {
-        const result = listProduct(); 
-        setProducts(result);
+        getProduct();
     }, []);
 
     // funcion para poblar el objeto product que viene del form
-    const handlerAddProdcut = (prodcut) => {
-
+    const handlerAddProdcut = async (prodcut) => {
         /**
          * Si el producto está incluido en el arreglo 
          * quiere decir que lo que queremos es editarlo
-         * y no crear uno nuevo, por lo tanto lo buscamos por su nombre
+         * y no crear uno nuevo, por lo tanto lo buscamos por su id
          * y se modifica
          */
         if (prodcut.id > 0){ 
+            // esto seria la respuesta con los datos actualizados
+            const response = await update(prodcut);
+
             setProducts(products.map(prod => {
                 if(prod.id == prodcut.id){
-                    return {...prodcut}
+                    return {...response.data}
                 }
                 return prod;
             }))
         }else{
+            // producto que viene creado del backend
+            const response = await create(prodcut);
             // si no está en el arreglo lo creamos nuevo
-            setProducts([...products, {...prodcut, id: new Date().getTime()}])
+            setProducts([...products, {...response.data}])
         }
     }
  
@@ -58,6 +67,7 @@ export const ProductApp = ({title = ''}) => {
         la función devulve un arreglo con los otros prods y ese lo deja fuera
     */
     const handlerRemoveProduct = (id) =>{
+        remove(id);
         setProducts(products.filter(prod => prod.id != id));
     }
 
